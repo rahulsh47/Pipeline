@@ -24,14 +24,18 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+            cd Nightwatch
+            npm ci
       - run: sudo apt-get install xvfb 
 
       - name: Run Nightwatch tests
-        run: xvfb-run --auto-servernum npm test -- --env chrome
+        run: |
+            cd Nightwatch
+            xvfb-run --auto-servernum npm test -- --env chrome
 
       - name: Archive test reports
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: tests_output  # Adjust this to match the directory where Nightwatch generates test reports
+          path: Nightwatch/tests_output  # Adjust this to match the directory where Nightwatch generates test reports
