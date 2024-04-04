@@ -1,11 +1,6 @@
 name: Multiple Testing Framework
 
-on:
-  push:
-    branches: [ "master" ]
-  workflow_dispatch:
-  # schedule:
-  #   - cron: '0 10 * * 1'
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   test-nightwatch:
@@ -33,6 +28,10 @@ jobs:
         run: xvfb-run --auto-servernum npm test -- --env chrome
 
       - name: Archive test reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: tests_output  # Adjust this to match the directory where Nightwatch generates test reports
         uses: actions/upload-artifact@v2
         with:
           name: test-reports
