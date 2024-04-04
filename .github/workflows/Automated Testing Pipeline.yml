@@ -1,6 +1,11 @@
 name: Multiple Testing Framework
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 10 * * 1'
 
 jobs:
   test-nightwatch:
