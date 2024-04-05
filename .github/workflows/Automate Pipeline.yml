@@ -44,7 +44,8 @@ jobs:
           npm install -g newman-reporter-htmlextra
       - name: Run Collections
         run: |
-          newman run "Postman/Postman API - Assignmentt.json" -e "Postman/Users.postman_environment.json" -r cli,htmlextra --reporter-htmlextra-export testArtifacts/htmlreport.html
+           cd Postman
+           newman run "Postman/Postman API - Assignmentt.json" -e "Postman/Users.postman_environment.json" -r cli,htmlextra --reporter-htmlextra-export testArtifacts/htmlreport.html
       - name: Publish report
         uses: actions/upload-artifact@v4
         with:
