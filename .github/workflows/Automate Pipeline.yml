@@ -59,7 +59,7 @@ jobs:
       - name: Run JMeter Tests
         uses:  rbhadti94/apache-jmeter-action@v0.7.0
         with:
-          testFilePath: './Jmeter/Test_Plan.jmx'
+          testFilePath: 'Jmeter/Test_Plan.jmx'
           outputReportsFolder: Jmeter
       - name: Publish report
         uses: actions/upload-artifact@v4
