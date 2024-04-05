@@ -32,8 +32,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: Nightwatch/tests_output  # Adjust this to match the directory where Nightwatch generates test reports
-
+          path: Nightwatch/tests_output 
  Postman:
     runs-on: ubuntu-latest
 
@@ -61,7 +60,7 @@ jobs:
         uses : actions/upload-artifact@v4
         with:
            name : Reports
-           Path : SampleArtifact/
+           Path : Postman
 
  Jmeter:
      runs-on: ubuntu-latest
@@ -75,6 +74,11 @@ jobs:
         with:
           testFilePath: './Test_Plan.jmx'
           outputReportsFolder: Jmeter
-
+          
+      - name: Publish report
+        uses : actions/upload-artifact@v4
+        with:
+           name : Reports
+           Path : Jmeter
       
     
