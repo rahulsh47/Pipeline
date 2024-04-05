@@ -57,7 +57,7 @@ jobs:
           npm install -g newman
           npm install -g newman-reporter-htmlextra 
       #Run Collection
-      - name : Run Collection
+      - name : Run Postman
         run : |
           cd Postman
           # newman run "Postman API - Assignmentt.json" -e "Users.postman_environment.json" -r htmlextra --reporter-htmlextra-extract SampleArtifact/report.html
