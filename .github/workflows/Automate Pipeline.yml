@@ -55,14 +55,15 @@ jobs:
    steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: run jmeter on github action
-  
+      - name: Change Directory
+        run: cd Jmeter
+      - name: run jmeter on github action  
         uses: sebiboga/run-jmeter-github-action@v0.0.5
         with:
-          test-plan-path: '/Jmeter/Test_Plan.jmx'
+          test-plan-path: './Test_Plan.jmx'
 
       # Commented-out step with proper indentation
       - name: Run JMeter Tests (using jmeter command) 
         run: |
-          jmeter -n -t Jmeter/Test_Plan.jmx 
+          jmeter -n -t Test_Plan.jmx 
 
