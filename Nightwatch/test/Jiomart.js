@@ -23,7 +23,7 @@ describe('Jiomart Search', function() {
     // browser.pause();
 
 
-    browser.assert.urlContains('https://www.jiomart.com/search/iphone%2015/in/prod_mart_master_vertical');
+    browser.assert.urlContains('https://www.jiomart.com/search/ice%20cream/in/prod_mart_master_vertical');
   });
 
   it('2. Verify that the user should not be able to search Unavailable product',async function(browser){
