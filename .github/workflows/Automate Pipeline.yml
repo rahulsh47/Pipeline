@@ -1,84 +1,70 @@
-name : Automated Tests
+on:
+  push:
+  workflow_dispatch:
 
-on: 
- push:
- workflow_dispatch:
-
-jobs: 
- Nightwatch:
+jobs:
+  Nightwatch:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-           cache: 'npm'
+          cache: 'npm'
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
-        with:         
+        with:
           node-version: 21
-
       - name: Install dependencies
         run: |
-            cd Nightwatch
-            npm ci
-      - run: sudo apt-get install xvfb 
-
+          cd Nightwatch
+          npm ci
+      - run: sudo apt-get install xvfb
       - name: Run Nightwatch tests
         run: |
-            cd Nightwatch
-            xvfb-run --auto-servernum npm test -- --env chrome
-
+          cd Nightwatch
+          xvfb-run --auto-servernum npm test -- --env chrome
       - name: Archive test reports
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: Nightwatch/tests_output 
- Postman:
+          path: Nightwatch/tests_output
+
+  Postman:
     runs-on: ubuntu-latest
-
-
     steps:
       - uses: actions/checkout@v3
-
-      
-      - name : Install Node
-        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4  # Corrected action for Node.js installation
         with:
-           node-version : 12
-      - name : Install Newman
-        run : |
+          node-version: 12
+      - name: Install Newman
+        run: |
           npm install -g newman
-          npm install -g newman-reporter-htmlextra 
-   
-      - name : Run Collections
-        run : |
-          
-          
-           newman run "Postman/Postman API - Assignmentt.json" -e "Postman/Users.postman_environment.json" --reporters cli , htmlextra --reporter-htmlextra-export testArtifacts/htmlreports.html
-      
+          npm install -g newman-reporter-htmlextra
+      - name: Run Collections
+        run: |
+          newman run "Postman API - Assignmentt.json" -e "Postman/Users.postman_environment.json" --reporters cli,htmlextra --reporter-htmlextra-export testArtifacts/htmlreports.html
       - name: Publish report
-        uses : actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
-           name : Reports
-           Path : Postman
+          name: Reports
+          path: Postman
 
- Jmeter:
-     runs-on: ubuntu-latest
-     steps:
-      - name : Checkout Repository
-      - uses: actions/checkout@v4
+  Jmeter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: run jmeter on github action
-  
-        uses:  rbhadti94/apache-jmeter-action@f7da1bc9fee0
+      - name: Run JMeter Tests
+        uses: rbhadti94/apache-jmeter-action@f7da1bc9fee0
         with:
           testFilePath: './Test_Plan.jmx'
           outputReportsFolder: Jmeter
-          
       - name: Publish report
-        uses : actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
-           name : Reports
-           Path : Jmeter
-      
-    
+          name: Reports
+          path: Jmeter
+
+
