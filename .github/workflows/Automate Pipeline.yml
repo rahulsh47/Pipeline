@@ -8,10 +8,6 @@ on:
 jobs: 
  Nightwatch:
     runs-on: ubuntu-latest
- 
-    
-        
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,3 +34,33 @@ jobs:
         with:
           name: test-reports
           path: Nightwatch/tests_output  # Adjust this to match the directory where Nightwatch generates test reports
+
+ Jmeter:
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: run jmeter on github action
+  # You may pin to the exact commit or the version.
+  # uses: sebiboga/run-jmeter-github-action@a492bfe3a62c8c15bf62e7c0cdd40c94d2e2f7e5
+        uses: sebiboga/run-jmeter-github-action@v0.0.5
+        with:
+          test-plan-path: './Test_Plan.jmx'
+
+      # Commented-out step with proper indentation
+      - name: Run JMeter Tests (using jmeter command)  # Commented out
+        run: |
+          jmeter -n -t Test_Plan.jmx 
+
+      
+
+      # Upload Results step with proper indentation
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: jmeter-results
+          path: test_report
+    
+    
