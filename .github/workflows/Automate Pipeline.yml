@@ -26,7 +26,7 @@ jobs:
       - name: Archive test reports
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports
+          name: Nightwatch-test-reports
           path: Nightwatch/tests_output
 
   Postman:
@@ -47,7 +47,7 @@ jobs:
       - name: Publish report
         uses: actions/upload-artifact@v4
         with:
-          name: Reports
+          name: Postman-Reports
           path: Postman
 
   jmeter-tests:
