@@ -57,11 +57,11 @@ jobs:
         uses: actions/checkout@v4
  
     
-      - name: run jmeter on github action
-        uses:  rbhadti94/apache-jmeter-action@v0.4.0
-        with:
-            testFilePath: './Jmeter/Test_Plan.jmx'
-            outputReportsFolder: 'Jmeter/result'
+      - name: run jmeter on github action   
+        run: |
+          cd Jmeter
+          jmeter -n -t test_script.jmx -l test_results.jtl -e -o report_folder
+ 
       - name: Upload Results
         uses: actions/upload-artifact@v4
         with:
