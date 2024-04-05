@@ -65,5 +65,6 @@ jobs:
       # Commented-out step with proper indentation
       - name: Run JMeter Tests (using jmeter command) 
         run: |
+          cd Jmeter
           jmeter -n -t Test_Plan.jmx 
 
