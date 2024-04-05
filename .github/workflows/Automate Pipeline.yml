@@ -35,40 +35,36 @@ jobs:
           name: test-reports
           path: Nightwatch/tests_output  # Adjust this to match the directory where Nightwatch generates test reports
 
- Jmeter:
+ Postman:
     runs-on: ubuntu-latest
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Install JMeter
-        run: |
-          curl -O https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.2.tgz
-          tar -xzf apache-jmeter-5.6.2.tgz
-          export PATH=$PATH:$PWD/apache-jmeter-5.6.2/bin
-
-
-      - name: run jmeter on github action
-  # You may pin to the exact commit or the version.
-  # uses: sebiboga/run-jmeter-github-action@a492bfe3a62c8c15bf62e7c0cdd40c94d2e2f7e5
-        uses: sebiboga/run-jmeter-github-action@v0.0.5
+      - name : Create dir
+        run : |
+          mkdir SampleArtifact
+      #Install Nodejs
+      - name : Install Node
+        uses: actions/checkout@v4
         with:
-          test-plan-path: './Test_Plan.jmx'
-
-      # Commented-out step with proper indentation
-      - name: Run JMeter Tests (using jmeter command)  # Commented out
-        run: |
-            cd Jmeter
-            Jmeter -n -t Test_Plan.jmx 
-
-      
-
-      # Upload Results step with proper indentation
-      - name: Upload Results
-        uses: actions/upload-artifact@v4
+           node-version : 12
+      # Install Newman and Reporter
+      - name : Install Newman
+        run : |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra 
+      #Run Collection
+      - name : Run Collection
+        run : |
+          # newman run "Postman API - Assignmentt.json" -e "Users.postman_environment.json" -r htmlextra --reporter-htmlextra-extract SampleArtifact/report.html
+          newman run "Postman API - Assignmentt.json" -e "Users.postman_environment.json" --reporters cli , htmlextra --reporter-htmlextra-export testArtifacts/htmlreports.html
+      #Publish the Report
+      - name: Publish report
+        uses : actions/upload-artifact@v4
         with:
-          name: jmeter-results
-          path: test_report
-    
+           name : Reports
+           Path : SampleArtifact
     
