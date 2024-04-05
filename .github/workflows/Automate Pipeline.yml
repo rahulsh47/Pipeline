@@ -64,7 +64,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Navigate to test folder
-        run: cd test
+        run: cd Jmeter
         working-directory: ${{ github.workspace }}/Jmeter
 
       - name: Download JMeter
