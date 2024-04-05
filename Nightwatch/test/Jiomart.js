@@ -13,7 +13,7 @@ describe('Jiomart Search', function() {
     //   document.querySelector('#autocomplete-0-suggestions-list .aa-Item:first-child').click();
     // );
 
-    await browser.waitForElementVisible("#autocomplete-0-suggestions-list .aa-Item:first-child", 5000);
+    await browser.waitForElementVisible("#autocomplete-0-suggestions-list .aa-Item:first-child", 10000);
     await browser.execute(
       'document.querySelector("#autocomplete-0-suggestions-list .aa-Item:first-child").click();'
     );
