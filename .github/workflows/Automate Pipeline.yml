@@ -80,5 +80,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-results
-          path: test_report
+          path: Jmeter/test_report
     
