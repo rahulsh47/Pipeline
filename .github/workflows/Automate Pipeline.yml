@@ -62,11 +62,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-
-      - name: Navigate to test folder
-        run: cd Jmeter
-        working-directory: ${{ github.workspace }}/Jmeter
-
       - name: Download JMeter
         run: |
           wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.3.tgz
