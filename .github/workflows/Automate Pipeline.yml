@@ -55,16 +55,15 @@ jobs:
    steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
- 
-    
-      - name: run jmeter on github action   
-        run: |
-          cd Jmeter
-          jmeter -n -t test_script.jmx -l test_results.jtl -e -o report_folder
- 
-      - name: Upload Results
+
+      - name: Run JMeter Tests
+        uses:  rbhadti94/apache-jmeter-action@v0.7.0
+        with:
+          testFilePath: './Test_Plan.jmx'
+          outputReportsFolder: Jmeter
+      - name: Publish report
         uses: actions/upload-artifact@v4
         with:
-          name: jmeter-results
-          path: Jmeter/result
+          name: Reports
+          path: Jmeter
 
