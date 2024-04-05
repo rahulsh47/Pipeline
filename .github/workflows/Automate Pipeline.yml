@@ -45,7 +45,7 @@ jobs:
       - name: Run Collections
         run: |
            cd Postman
-           newman run "Postman/Postman API - Assignmentt.json" -e "Postman/Users.postman_environment.json" -r cli,htmlextra --reporter-htmlextra-export testArtifacts/htmlreport.html
+           newman run "Postman API - Assignmentt.json" -e "Users.postman_environment.json" -r cli,htmlextra --reporter-htmlextra-export testArtifacts/htmlreport.html
       - name: Publish report
         uses: actions/upload-artifact@v4
         with:
