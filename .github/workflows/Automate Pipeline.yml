@@ -55,15 +55,14 @@ jobs:
    steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      - name: run jmeter on github action
+  
+        uses: sebiboga/run-jmeter-github-action@v0.0.5
+        with:
+          test-plan-path: '/Jmeter/Test_Plan.jmx'
 
-      - name: Run JMeter Tests
-        uses:  rbhadti94/apache-jmeter-action@f7da1bc9fee0b7c85b421761fa30a6f3e2b95647
-        with:
-          testFilePath: 'Jmeter/Test_Plan.jmx'
-          outputReportsFolder: Jmeter
-      - name: Publish report
-        uses: actions/upload-artifact@v4
-        with:
-          name: Reports
-          path: Jmeter
+      # Commented-out step with proper indentation
+      - name: Run JMeter Tests (using jmeter command) 
+        run: |
+          jmeter -n -t Jmeter/Test_Plan.jmx 
 
