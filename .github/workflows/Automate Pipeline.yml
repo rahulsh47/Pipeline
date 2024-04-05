@@ -75,20 +75,20 @@ jobs:
       - name: run jmeter on github action
   # You may pin to the exact commit or the version.
   # uses: sebiboga/run-jmeter-github-action@a492bfe3a62c8c15bf62e7c0cdd40c94d2e2f7e5
-        uses: rbhadti94/apache-jmeter-action@v0.4.0
+        uses:  rbhadti94/apache-jmeter-action@f7da1bc9fee0
         with:
-            testFilePath:  './Test_Plan.jmx'
-            outputReportsFolder: Jmeter
+          testFilePath: './Test_Plan.jmx'
+          outputReportsFolder: Jmeter
 
       # Commented-out step with proper indentation
-      # - name: Run JMeter Tests (using jmeter command)  # Commented out
-      #   run: |
-      #     jmeter -n -t Test_Plan.jmx
+      - name: Run JMeter Tests (using jmeter command)  # Commented out
+        run: |
+          jmeter -n -t Test_Plan.jmx
 
-      # # Upload Results step with proper indentation
-      # - name: Upload Results
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: jmeter-results
-      #     path: test_report
+      # Upload Results step with proper indentation
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: jmeter-results
+          path: test_report
     
