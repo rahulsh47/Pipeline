@@ -73,3 +73,9 @@ jobs:
           ./apache-jmeter-5.4.3/bin/jmeter -n -t Test_Plan.jmx -JcsvValues=Values.csv
         working-directory: ${{ github.workspace }}/Jmeter
 
+      - name: Upload Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: jmeter-results
+          path: Jmeter/result
+
