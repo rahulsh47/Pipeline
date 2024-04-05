@@ -53,18 +53,18 @@ jobs:
   Jmeter:
    runs-on: ubuntu-latest
    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-
-    - name: Run JMeter Tests
-      uses: rbhadti94/apache-jmeter-action@v0.4.0
-      with:
-        testFilePath: 'Jmeter/Test_Plan.jmx'  # Corrected path to the JMX file
-        outputReportsFolder: Jmeter
-
-    - name: Publish report
-      uses: actions/upload-artifact@v4
-      with:
-        name: Reports
-        path: Jmeter
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+ 
+    
+      - name: run jmeter on github action
+        uses:  rbhadti94/apache-jmeter-action@v0.4.0
+        with:
+            testFilePath: './Jmeter/Test_Plan.jmx'
+            outputReportsFolder: 'Jmeter/result'
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: jmeter-results
+          path: Jmeter/result
 
