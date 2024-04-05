@@ -50,21 +50,26 @@ jobs:
           name: Reports
           path: Postman
 
-  Jmeter:
-   runs-on: ubuntu-latest
-   steps:
+  jmeter-tests:
+ 
+      runs-on: ubuntu-latest
+
+      steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: Change Directory
-        run: cd Jmeter
-      - name: run jmeter on github action  
-        uses: sebiboga/run-jmeter-github-action@v0.0.5
+
+      - name: Install Java
+        uses: actions/setup-java@v2
         with:
-          test-plan-path: './Test_Plan.jmx'
+          java-version: '11'
 
-      # Commented-out step with proper indentation
-      - name: Run JMeter Tests (using jmeter command) 
+      - name: Download JMeter
         run: |
-          cd Jmeter
-          jmeter -n -t Test_Plan.jmx 
+          wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.3.tgz
+          tar -xf apache-jmeter-5.4.3.tgz
+        working-directory: ${{ github.workspace }}
 
+      - name: Run JMeter Tests
+        run: |
+          ./apache-jmeter-5.4.3/bin/jmeter -n -t Test_Plan.jmx
+        working-directory: ${{ github.workspace }}
