@@ -47,13 +47,13 @@ jobs:
   # uses: sebiboga/run-jmeter-github-action@a492bfe3a62c8c15bf62e7c0cdd40c94d2e2f7e5
         uses: sebiboga/run-jmeter-github-action@v0.0.5
         with:
-          test-plan-path: './Jmeter/Test Plan.jmx'
+          test-plan-path: './Test_Plan.jmx'
 
       # Commented-out step with proper indentation
       - name: Run JMeter Tests (using jmeter command)  # Commented out
         run: |
             cd Jmeter
-            jmeter -n -t Test Plan.jmx 
+            jmeter -n -t Test_Plan.jmx 
 
       
 
