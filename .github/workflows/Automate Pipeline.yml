@@ -100,10 +100,7 @@ jobs:
     - name: Build with Maven
       run: |
         cd Selenium_Amazon_Poject
-        mvn -B Clean test
-
-    # - name : Run Selenium Test
-    #   run: mvn clean
+        mvn -B clean test
 
     - name : Upload Test Reports
       uses : actions/upload-artifact@v3
