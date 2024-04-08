@@ -13,13 +13,16 @@ import java.util.ArrayList;
 public class test {
 
         private WebDriver driver;
+        ChromeOptions options;
 
         @BeforeTest
         public void LaunchAmazonHomePage(){
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-            driver.get("https://www.amazon.in/ ");
+            options = new ChromeOptions();
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--headless");
+            options.addArguments("--window-size=1920x1080");
+            driver = new ChromeDriver(options);
             String ExpTitle1 = "Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in";
             Assert.assertEquals(ExpTitle1,driver.getTitle()); //checking whether the correct page is loaded through Assert.
         }
